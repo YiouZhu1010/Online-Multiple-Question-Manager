@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>MC Questions Management</title>
+	<meta name="description" content="Hello World">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="login.css" />
+	<style>
+		h4{
+			text-align: center;
+		}
+		.editquestion{
+			width: 500px;
+		}
+		input.btn-custom{
+			width:200px;
+		}
+		#editquestion{
+			position: relative;
+			float: left;
+		}
+	</style>
+	
+
+	
+</head>
+
+<body>
+
+	<header>
+		<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="" class="navbar-brand">Question List</a>
+				</div>
+				<div class="collpase navbar-collapse" id="example">
+					<ul class="nav navbar-nav">
+						<li><a href="index.html">Home</a></li>
+						<li class="active"><a href="edit.html">Edit Question</a></li>
+						<li><a href="aboutus.html">About Us</a></li>
+						<li><a href="login.html">Login/Logout</a></li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+			<div class="jumbotron">
+			<br>
+			<h4>Please Enter the Following Information to Modify a Question:</h4>
+			</div> 
+	</header>
+	<div class="container">
+			
+				<div class="well editquestion" id='editquestion'>
+				<form method="post" action="/login">
+					<legend>Edit Question</legend>
+                    <div class="form-group">
+                        <label for="questionid">Question ID</label>
+                        <input value='' id="questionid" name="qid" placeholder="Question ID" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input id="title" value='' name='title' placeholder="title" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input value='' id="description" name="description" placeholder="Description" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="choicea">Choice A</label>
+                        <input value='' id="choicea" name="choice_a" placeholder="Choice A" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="choiceb">Choice B</label>
+                        <input value='' id="choiceb" name="choice_b" placeholder="Choice B" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="choicec">Choice C</label>
+                        <input value='' id="choicec" name="choice_c" placeholder="Choice C" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="choiced">Choice D</label>
+                        <input value='' id="choiced" name="choice_d" placeholder="Choice D" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="tags">Tags</label>
+                        <input value='' id="tags" name="tags" placeholder="Tags" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-custom" value="Submit Your Modification" />
+                    </div>
+				</form>
+				</div>
+			
+	</div>
+
+		
+
+
+	<footer>
+		<div class="container">
+			<hr>
+
+			<p>CSCI 2720 Course Project © 2016. All Rights Reserved.&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href='aboutus.html'>Contact Us</a></span></p>
+			
+			</p>
+		</div> <!-- end container -->
+	</footer>
+		
+	<!-- Latest compiled and minified JavaScript -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+</body>	
+</html>

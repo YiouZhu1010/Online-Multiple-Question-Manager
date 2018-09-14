@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>MC Questions Management</title>
+	<meta name="description" content="Hello World">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="fileSaver.js"></script>
+	
+
+</head>
+
+<body>
+
+	<header>
+		<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="" class="navbar-brand">Question List</a>
+				</div>
+				<div class="collpase navbar-collapse" id="example">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="index.html">Home</a></li>
+						<li><a href="edit.html">Edit Question</a></li>
+						<li><a href="aboutus.html">About Us</a></li>
+						<li><a href="login.html">Login/Logout</a></li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+			<div class="jumbotron" id="welcome">
+				<div class="container" >
+					<!-- <h1></h1> -->
+					<br>
+					<h3>Welcome.</h3>
+					<h4>Manage your multiple choices questions here.</h4>
+				</div> 
+			</div> 
+	</header>
+
+		<div class="container">
+		<div class="well">
+				<table class="table table-hover" id="questionlist">
+					 <thead>
+					    <th><b><input type="checkbox" id="selectAll" /></b></th>
+						<th><b>ID</b></th>
+						<th><b>Title</b></th>
+						<th><b>Tags</b></th>
+						<th><b>Creator</b></th>
+						<th><b>Last Modified Time</b></th>					  
+					</thead>
+					  
+				</table>
+				<a href="" class="btn btn-custom">Add New Question</a>
+				<a href="" class="btn btn-custom" id ="exportToCsv">Export to CSV File</a>
+			</div>
+			
+		</div>
+
+
+	<footer>
+		<div class="container">
+			<hr>
+
+			<p>CSCI 2720 Course Project © 2016. All Rights Reserved.&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href='aboutus.html'>Contact Us</a></span></p>
+			
+			</p>
+		</div> <!-- end container -->
+	</footer>
+		
+	<!-- Latest compiled and minified JavaScript -->
+<!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+
+$(document).ready(function() {
+    var table = $('#questionlist').DataTable( {
+		"columnDefs": [ 
+			{ "sortable": false, "width":"100px", "targets": 0 }
+		],
+		"pageLength": 10,
+		"lengthChange": false,
+		"dom": '<"top"f>rt<"bottom"lpi><"clear">',
+		
+        "ajax": {
+        	url:'/list',
+        	dataSrc:''
+        },
+		"pagingType": "simple",
+        "columns": [
+            { "data": null,
+			  'render': function(){ return '<input type="checkbox" >'; }
+			},
+            { "data": "qid" },
+            { "data": "title" },
+            { "data": "tags" },
+            { "data": "creator_id" },
+            { "data": "last_mod_time" }
+        ]
+    } );
+    $('#selectAll').on('click', function(){
+		var rows = table.rows().nodes();
+		$('input[type="checkbox"]', rows).prop('checked', this.checked);
+	});
+	
+	$('#questionlist tbody').on('change', 'input[type="checkbox"]:not("#selectAll")', function(){
+		var rows = table.rows().nodes();
+		var isSelectAll = true;
+		$('input[type="checkbox"]:not("#selectAll")', rows).each(function(){
+			if ( !this.checked ) {
+				isSelectAll = false;
+			}
+		});
+		$('#selectAll').prop('checked', isSelectAll);
+	});
+	
+	function getOutputData() {
+		var output = '"ID","Title","Tags","Creator","Last Modified Time"';
+		var rows = table.rows().nodes();
+		
+		// for (var i=0){}
+		
+		return output;
+	}
+			
+	$('#exportToCsv').click(function(){
+		var data = getOutputData();
+		
+		var charset = "charset=utf-8";
+		var mimeType = "text/csv";
+		var fileName = "questions";
+		var fileExtension = ".csv";
+		saveAs(new Blob([data],
+			{type: mimeType + ";" + charset}),
+			fileName + fileExtension, true);
+	});
+	
+} );
+
+
+</script>
+</body>	
+</html>
